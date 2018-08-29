@@ -3,10 +3,11 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <!-- <ngx-spinner></ngx-spinner> -->
+  <ngx-spinner></ngx-spinner>
 
   <div id = "sse">
-    <button (click) = "WebSocketDemoTest()">Run WebSocket</button>
+    <button (click) = "WebSocketDemoTest('Done')">Run WebSocket</button>
+    <button (click) = "WebSocketDemoTest('Loading')">Loading WebSocket</button>
  </div>
 </div>
 

@@ -11,22 +11,35 @@ import {WebSocketHelper} from './websocket-helper';
 })
 export class AppComponent implements OnInit{
   syncMessenger : WebSocketHelper;
+  isLoading : boolean;
   constructor(private spinner : NgxSpinnerService){
-    this.syncMessenger=new WebSocketHelper("wss://echo.websocket.org",this.MessageRecieved)
+    this.syncMessenger=new WebSocketHelper("wss://echo.websocket.org",this.MessageRecieved);
   }
-  MessageRecieved(data){
+  MessageRecieved=(data)=>{
     debugger;
+    if(data=='Loading'){
+      this.isLoading=true;
+      this.spinner.show();
+    }
+    else{
+      this.isLoading=false;
+      this.spinner.hide();
+      alert(data);
+    }
   }
-  WebSocketDemoTest(){
-    this.syncMessenger.SendMessage("Done");
+  WebSocketDemoTest(msg:string){
+    this.syncMessenger.SendMessage(msg);
   }
 
   ngOnInit(){
-    this.spinner.show();
+    if(this.isLoading==true)
+      this.spinner.show();
+    else
+      this.spinner.hide();
 
-    setTimeout(
-      ()=>{this.spinner.hide();},5000
-    )
+    // setTimeout(
+    //   ()=>{this.spinner.hide();},5000
+    // )
   }
   title = 'AngularOverlay';
 }
