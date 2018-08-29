@@ -2,17 +2,18 @@ export class WebSocketHelper{
     webSocket:WebSocket;
     constructor(url:string,onMessageCallBack:Function=null){
         this.webSocket=new WebSocket(url);
-        this.webSocket.onopen = function() {
-           console.log("opened")
-         };
-         this.webSocket.onmessage=function(messageResponse){
-                if(onMessageCallBack!=undefined){
-                    onMessageCallBack(messageResponse.data);
-                }
-         }
 
+        this.webSocket.onopen=function(){
+            alert('opened');
+        }
+
+        this.webSocket.onmessage=function(messageResponse){
+            if(onMessageCallBack!=null){
+                onMessageCallBack(messageResponse.data);
+            }
+        }
     }
-    SendMessage(message:string){
-        this.webSocket.send(message);
-    }    
+    SendMessage(msg:string){
+        this.webSocket.send(msg);
+    }
 }
